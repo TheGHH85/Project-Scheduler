@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GreyHatTech/Project-Harrison.git"
+  },
+  "author": "Zac Bondy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GreyHatTech/Project-Harrison/issues"
+  },
+  "homepage": "https://github.com/GreyHatTech/Project-Harrison#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.1.1"
+  }
+}
