@@ -1,12 +1,16 @@
 import React from "react";
-import {Routes, Route} from "react-router-dom";
-import Home from './view/MainPage';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Home from './views/MainPage';
+import AddClient from './views/AddClient';
 
 const App = () => {
   return (
+    <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/AddClient" element={<AddClient />} />
     </Routes>
+    </BrowserRouter>
   );
 }
 

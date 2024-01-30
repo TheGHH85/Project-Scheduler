@@ -33,6 +33,8 @@ app.use(session({
 
 app.use(cookieParser("secretcode"));
 
+const clientController = require('./controllers/clientControllers');
+app.use(clientController);
 
 
 app.use(express.static('public'));
