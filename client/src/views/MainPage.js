@@ -8,6 +8,7 @@ function MainPage(){
         <>
         <h1>Welcome Drey</h1>
         <Link to="/AddClient">Add Client</Link>
+        <Link to="/ScheduleView">Schedule View</Link>
         </>
     );
 }

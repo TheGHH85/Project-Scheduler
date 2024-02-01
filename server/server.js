@@ -21,6 +21,8 @@ app.use(cors({
     credentials: true
 }));
 
+app.use(express.json()); // This line is crucial
+
 app.use(session({
     secret: 'secretcode',
     resave: true,
@@ -35,6 +37,9 @@ app.use(cookieParser("secretcode"));
 
 const clientController = require('./controllers/clientControllers');
 app.use(clientController);
+
+const classRoutes = require('./controllers/scheduleControllers');
+app.use('/classes', classRoutes);
 
 
 app.use(express.static('public'));

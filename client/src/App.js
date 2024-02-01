@@ -2,6 +2,8 @@ import React from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from './views/MainPage';
 import AddClient from './views/AddClient';
+import ScheduleView from './views/ScheduleView';
+import DayDetailview from './views/DayDetailView';
 
 const App = () => {
   return (
@@ -9,6 +11,8 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/AddClient" element={<AddClient />} />
+      <Route path="/ScheduleView" element={<ScheduleView />} />
+      <Route path="/ScheduleView/:date" element={<DayDetailview />} />
     </Routes>
     </BrowserRouter>
   );

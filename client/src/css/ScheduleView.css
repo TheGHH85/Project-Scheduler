@@ -1,0 +1,27 @@
+.week-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .day-box {
+    flex-grow: 1;
+    margin: 0 10px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .day-box:nth-child(1) { background-color: #FFADAD; }
+  .day-box:nth-child(2) { background-color: #FFD6A5; }
+  .day-box:nth-child(3) { background-color: #FDFFB6; }
+  .day-box:nth-child(4) { background-color: #CAFFBF; }
+  .day-box:nth-child(5) { background-color: #9BF6FF; }
+  .day-box:nth-child(6) { background-color: #A0C4FF; }
+  .day-box:nth-child(7) { background-color: #BDB2FF; }
+  
+  /* Specific for the last box to be centered in the last row */
+  .week-container > :nth-child(7) {
+    grid-column-start: 2;
+  }
