@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const classSchema = new mongoose.Schema({
-    date: String, 
+    date: Date, 
     instructor: String,
     classType: String,
     time: String,

@@ -4,6 +4,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const classRoutes = require('./controllers/scheduleControllers');
+const clientController = require('./controllers/clientControllers');
 
 
 const app = express();
@@ -35,10 +37,10 @@ app.use(session({
 
 app.use(cookieParser("secretcode"));
 
-const clientController = require('./controllers/clientControllers');
+
 app.use(clientController);
 
-const classRoutes = require('./controllers/scheduleControllers');
+
 app.use('/classes', classRoutes);
 
 
