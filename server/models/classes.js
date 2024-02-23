@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
-const classSchema = new mongoose.Schema({
-    date: Date, 
+const Schema = mongoose.Schema;
+
+const classSchema = new Schema({
+    date: Date,
     instructor: String,
     classType: String,
     time: String,
-    
+    clients: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Client' }] // Assuming 'Client' is the name of your client model});
 });
-
 module.exports = mongoose.model('Class', classSchema);

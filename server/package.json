@@ -17,12 +17,15 @@
   },
   "homepage": "https://github.com/GreyHatTech/Project-Harrison#readme",
   "dependencies": {
+    "autoprefixer": "^10.4.17",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "moment-timezone": "^0.5.45",
     "mongodb": "^6.3.0",
-    "mongoose": "^8.1.1"
+    "mongoose": "^8.1.1",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1"
   }
 }

@@ -25,4 +25,14 @@ router.post('/add-client', function (req, res) {
 
 });
 
+router.get('/clients', async (req, res) => {
+    try {
+        const clients = await Client.find({});
+        res.json(clients);
+    } catch (err) {
+        console.error("Error fetching clients:", err);
+        res.status(500).json({ message: err.message });
+    }
+});
+
 module.exports = router;
