@@ -5,12 +5,15 @@ function SelectClientModal({ isOpen, onClose, clients, onClientSelected }) {
   if (!isOpen) return null;
 
   // Handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the form from actually submitting
-    const clientId = event.target.client.value; // Get the selected client ID from the form
-    onClientSelected(clientId); // Pass the selected client ID to the parent component
-    onClose(); // Close the modal
-  };
+const handleSubmit = (event) => {
+  event.preventDefault(); 
+  const clientId = event.target.client.value; 
+  const client = clients.find(c => c._id === clientId);
+  onClientSelected(client); // Assuming this now sends the full client object
+  onClose(); 
+
+};
+
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex justify-center items-center">

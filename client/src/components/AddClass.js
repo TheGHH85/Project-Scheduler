@@ -20,6 +20,7 @@ const AddClass = ({date, onClose, refreshClasses}) => {
     } catch (error){
         console.log(error);
     }
+
 };
 
 return (

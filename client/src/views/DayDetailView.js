@@ -4,9 +4,13 @@ import AddClassModal from '../components/AddClass';
 import SelectClientModal from '../components/SelectClientModal';
 import '../css/index.css';
 import axios from 'axios';
+import Header from '../components/header';
+import Footer from '../components/footer';
+import moment from 'moment';
 
 const DayDetailView = () => {
     const { date } = useParams();
+    console.log('Date at the start of DayDetailView:', date); // Debugging
     const [showAddClassModal, setShowAddClassModal] = useState(false);
     const [showClientModal, setShowClientModal] = useState(false);
     const [currentClassId, setCurrentClassId] = useState(null);
@@ -14,31 +18,36 @@ const DayDetailView = () => {
     const [clients, setClients] = useState([]);
 
     useEffect(() => {
-        fetchClasses();
+        console.log('Fetching classes and clients...');
+        fetchClasses(date);
         fetchClients();
     }, [date]);
 
-    const fetchClasses = async () => {
-        const formattedDate = formatDate(date);
-        if (!formattedDate) {
-            console.error("Invalid date format:", date);
-            return;
-        }
+   
+    
+
+    const fetchClasses = async (date) => {
         try {
-            const response = await axios.get(`http://localhost:8080/classes/${encodeURIComponent(formattedDate)}`);
+            // Fetch classes for the current date only
+            const response = await axios.get(`http://localhost:8080/classes/${encodeURIComponent(date)}`);
             setClasses(response.data);
         } catch (error) {
             console.error("Failed to fetch classes:", error);
         }
     };
+    
+    
+    
 
     const fetchClients = async () => {
+        console.log('Fetching classes...');
         try {
             const response = await axios.get('http://localhost:8080/clients');
             setClients(response.data);
         } catch (error) {
             console.error("Failed to fetch clients:", error);
         }
+        console.log('Clients:', clients);
     };
 
     const handleAddClassClick = () => setShowAddClassModal(true);
@@ -49,24 +58,35 @@ const DayDetailView = () => {
         setShowClientModal(true);
     };
 
-    const handleClientSelected = async (clientId) => {
+    const handleClientSelected = async (clientId, clientName) => {
         try {
             const url = `http://localhost:8080/classes/${currentClassId}/add-client`;
-            await axios.post(url, { clientId });
-            await fetchClasses();
-            setShowClientModal(false);
+            const response = await axios.post(url, { clientId });
+            // Optionally verify the response before updating the state
+    
+            // Use a callback to ensure we're working with the most up-to-date state
+            setClasses(currentClasses => {
+                return currentClasses.map(cls => {
+                    if (cls._id === currentClassId) {
+                        // Assuming you get the client's ID and name, adjust based on your data structure
+                        const newClient = { _id: clientId, name: clientName };
+                        const updatedClients = [...cls.clients, newClient];
+                        return { ...cls, clients: updatedClients };
+                    }
+                    return cls;
+                });
+            });
+            
+            setShowClientModal(false); // Assuming you want to close the modal on success
         } catch (error) {
             console.error("Failed to add client to class:", error);
         }
+        refreshClasses();
     };
+    
+    
 
-    const formatDate = (date) => {
-        const d = new Date(date);
-        if (isNaN(d.getTime())) return null;
-        let month = `${d.getMonth() + 1}`.padStart(2, '0');
-        let day = `${d.getDate()}`.padStart(2, '0');
-        return [d.getFullYear(), month, day].join('-');
-    };
+
 
     const refreshClasses = () => {
         fetchClasses();
@@ -87,7 +107,11 @@ const DayDetailView = () => {
 
     return (
         <div>
+            <Header />
             <h2>Classes for {date}</h2>
+   
+   
+
             <button onClick={handleAddClassClick} className="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Add Class
             </button>
@@ -100,6 +124,7 @@ const DayDetailView = () => {
                         {classes.filter(cls => cls.classType === classType)
                             .sort((a, b) => a.time.localeCompare(b.time))
                             .map((cls, index) => (
+                                
                                 console.log('Classes found with client deatils:', cls), // Debugging
                                 <div key={cls._id} className="my-2 p-2 bg-white text-black rounded shadow"> {/* Ensure unique key here */}
                                     <p>{cls.classType} - {cls.instructor} at {cls.time}</p>
@@ -121,6 +146,8 @@ const DayDetailView = () => {
             </div>
     
             {showClientModal && <SelectClientModal isOpen={showClientModal} onClose={() => setShowClientModal(false)} clients={clients} onClientSelected={handleClientSelected} />}
+       
+        <Footer />
         </div>
     );
     

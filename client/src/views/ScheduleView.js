@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { format, startOfWeek, addDays, subWeeks, addWeeks } from 'date-fns';
 import { useNavigate } from "react-router-dom";
-import "../css/ScheduleView.css";
+import '../css/index.css';
+import Header from '../components/header';
+import Footer from '../components/footer';
 
 function ScheduleView() {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -10,30 +12,79 @@ function ScheduleView() {
     const prevWeek = () => setCurrentDate(subWeeks(currentDate, 1));
     const nextWeek = () => setCurrentDate(addWeeks(currentDate, 1));
 
-    // Update format here to 'yyyy-MM-dd' for compatibility
-    const weekDays = Array.from({ length: 7 }).map((_, index) =>
-        format(addDays(startOfWeek(currentDate), index), 'yyyy-MM-dd'));
-    
+   // Generate week days starting from Monday
+   const weekDays = Array.from({ length: 7 }).map((_, index) =>
+   format(addDays(startOfWeek(currentDate, { weekStartsOn: 1 }), index), 'yyyy-MM-dd', { timeZone: 'UTC' })
+ );
+ console.log("Week Days:", weekDays);
 
-    const handleDayClick = (date) => {
-        // Ensure navigation uses the updated format
-        navigate(`/DayDetailView/${date}`);
-    }
+ const handleDayClick = async (date) => {
+  const adjustedDate = format(addDays(new Date(date), 0), 'yyyy-MM-dd');
+  console.log("Selected Date:", adjustedDate);
 
-    return (
-        <>
-            <h1>Schedule View</h1>
-            <button onClick={prevWeek}>Previous Week</button>
-            <button onClick={nextWeek}>Next Week</button>
-            <div className="week-container">
-                {weekDays.map((day, index) => (
-                    <div key={index} className="day-box" onClick={() => handleDayClick(day)}>
-                        {format(new Date(day), 'EEEE, MMMM d')} {/* Display in readable format but navigate with 'yyyy-MM-dd' */}
-                    </div>
-                ))}
-            </div>
-        </>
-    );
+  try {
+    const response = await fetch(`http://localhost:8080/classes/${encodeURIComponent(adjustedDate)}`);
+    const classes = await response.json();
+    console.log("Classes for selected date:", classes);
+    // Navigate to the day detail view or update state to display the classes
+    navigate(`/DayDetailView/${adjustedDate}`);
+  } catch (error) {
+    console.error("Error fetching classes:", error);
+    // Handle error gracefully, e.g., display an error message to the user
+  }
 }
 
-export default ScheduleView;
+
+
+
+
+    
+        return (
+            <>
+            <Header />
+                <h1 className="text-center text-3xl my-5">Schedule View</h1>
+              
+                <div className="my-5">
+                    {/* First Row: Monday to Friday */}
+                    <div className="flex justify-center mb-4 space-x-2">
+                      {weekDays.slice(0, 3).map((day, index) => (
+                          <div key={index} 
+                               className="cursor-pointer bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                               onClick={() => handleDayClick(day)}>
+                              {format(new Date(day), 'EEEE, MMMM d')}
+                          </div>
+                      ))}
+                    </div>
+                    {/* Second Row: Saturday and Sunday */}
+                    <div className="flex justify-center space-x-2">
+                      {weekDays.slice(3).map((day, index) => (
+                          <div key={index} 
+                               className="cursor-pointer bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                               onClick={() => handleDayClick(day)}>
+                              {format(new Date(day), 'EEEE, MMMM d')}
+                          </div>
+                      ))}
+                    </div>
+                </div>
+                <div className="flex justify-center mt-4">
+                  <button
+                    onClick={prevWeek}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-150 ease-in-out mr-2"
+                  >
+                    Previous Week
+                  </button>
+                  <button
+                    onClick={nextWeek}
+                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-150 ease-in-out"
+                  >
+                    Next Week
+                  </button>
+                </div>
+        
+                <Footer />
+            </>
+        );
+        
+    }
+    
+    export default ScheduleView;
