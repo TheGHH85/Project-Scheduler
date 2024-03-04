@@ -21,7 +21,7 @@ return(
       <p className="text-md">Scheduling Made Simple</p>
     </div>
     <div className="flex justify-end w-1/4">
-      <p className="text-sm bg-blue-700 px-3 py-1 rounded-full">v0.1.0</p>
+      <p className="text-sm bg-blue-700 px-3 py-1 rounded-full">v0.2.1</p>
     </div>
   </div>
 </>
