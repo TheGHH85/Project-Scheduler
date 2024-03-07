@@ -107,57 +107,52 @@ const DayDetailView = () => {
     };
 
     return (
-        <div className="flex flex-col min-h-screen">
-              <div className="flex-grow pb-16">
+        <div className="flex flex-col min-h-screen bg-darkblue text-primarytext">
+          <div className="flex-grow pb-16">
             <Header />
-            <div className="flex justify-center space-x-4 mt-5">
-            <Link to="/ScheduleView" className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Weekly View</Link>
-        </div>
-            <h2 className='grid text-center mt-5 text-3xl'>Classes for {date}</h2>
-   
-   
-
-            <div className="flex justify-center">
-    <button onClick={handleAddClassClick} className="flex items-center m-7 bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-12 rounded">
-                       Add Class
-            </button>
+            <div className="flex justify-center mt-5 md:space-x-4">
+              <Link to="/ScheduleView" className="bg-softblue hover:bg-lightgrey text-white font-bold py-2 px-4 rounded">Weekly View</Link>
+            </div>
+            <h2 className='text-center mt-5 text-3xl'>Classes for {date}</h2>
+            <h3 className='text-center mt-5 text-bold text-xl'>*Please refresh the page after you add a class or client*</h3>
+      
+            <div className="flex justify-center mt-5">
+              <button onClick={handleAddClassClick} className="flex items-center bg-accent1 hover:bg-accent2 text-white font-bold py-4 px-8 rounded">Add Class</button>
             </div>
             {showAddClassModal && <AddClassModal date={date} onClose={handleCloseAddClassModal} refreshClasses={refreshClasses} />}
-            
-            <div className="flex flex-row items-start justify-center h-screen">
-                {['Class A', 'Class B', 'Class C'].map((classType) => (
-                    <div key={classType} className={`flex-1 text-center ${getColorClass(classType)} text-white p-5 overflow-auto rounded-lg`}>
-                        <h3 className="text-xl font-bold">{classType}</h3>
-                        {classes.filter(cls => cls.classType === classType)
-                            .sort((a, b) => a.time.localeCompare(b.time))
-                            .map((cls, index) => (
-                                
-                                console.log('Classes found with client deatils:', cls), // Debugging
-                                <div key={cls._id} className="my-2 p-2 bg-white text-black rounded shadow"> {/* Ensure unique key here */}
-                                    <p>{cls.classType} - {cls.instructor} at {cls.time}</p>
-                                    {/* Render client names if available */}
-                                    {cls.clients && cls.clients.length > 0 && (
-                                      <ul className="mt-2">
-                                        {cls.clients.map(client => (
-                                          <li key={client._id}>{client.name}</li> // Assuming client details are populated
-                                        ))}
-                                      </ul>
-                                    )}
-                                    <button onClick={() => handleAddClientToClass(cls._id)} className="mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded">
-                                        Add Client
-                                    </button>
-                                </div>
-                        ))}
-                    </div>
-                ))}
+      
+            <div className="flex flex-col space-y-4 items-center mt-5 md:flex-row md:space-y-0 md:space-x-4 md:justify-center md:items-start">
+              {['Class A', 'Class B', 'Class C'].map((classType) => (
+                <div key={classType} className={`bg-softblue text-white p-5 overflow-auto rounded-lg md:flex-1`}>
+                  <h3 className="text-xl font-bold">{classType}</h3>
+                  {classes.filter(cls => cls.classType === classType)
+                    .sort((a, b) => a.time.localeCompare(b.time))
+                    .map((cls, index) => (
+                      <div key={cls._id} className="my-2 p-2 bg-neutraldark text-white rounded shadow">
+                        <p>{cls.classType} - {cls.instructor} at {cls.time}</p>
+                        {cls.clients && cls.clients.length > 0 && (
+                          <ul className="mt-2 text-primarytext">
+                            {cls.clients.map(client => (
+                              <li key={client._id}>{client.name}</li>
+                            ))}
+                          </ul>
+                        )}
+                        <button onClick={() => handleAddClientToClass(cls._id)} className="mt-2 bg-accent1 hover:bg-accent2 text-white font-bold py-1 px-2 rounded">
+                          Add Client
+                        </button>
+                      </div>
+                  ))}
+                </div>
+              ))}
             </div>
-    
+      
             {showClientModal && <SelectClientModal isOpen={showClientModal} onClose={() => setShowClientModal(false)} clients={clients} onClientSelected={handleClientSelected} />}
+          </div>
+          <Footer />
         </div>
-        <Footer />
-        </div>
-       
-    );
+      );
+      
+    
     
 };
       

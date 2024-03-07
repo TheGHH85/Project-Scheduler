@@ -12,26 +12,27 @@ useEffect(() => {
     return () => clearInterval(interval);
 }, []);
 
-return(
-<>
-  <div className="flex items-center w-full px-6 py-4 bg-blue-600 text-white shadow-md">
-    <div className="flex justify-start w-1/4">
-      <p className="text-lg">{currentDate.toLocaleString()}</p>
+return (
+  <>
+    <div className="bg-darkblue text-white shadow-md">
+      <div className="px-4 py-3 flex flex-col md:flex-row items-center justify-between">
+        <div className="mb-2 md:mb-0">
+          <p className="text-sm md:text-lg">{currentDate.toLocaleString()}</p>
+        </div>
+        <div className="text-center mb-2 md:mb-0">
+          <p className="text-xl font-semibold">Drey Dog Scheduler</p>
+          <p className="text-sm">Scheduling Made Simple</p>
+        </div>
+        <div className="flex flex-col md:flex-row items-center">
+          <button className="text-sm md:text-lg hover:bg-softblue rounded-full px-3 py-1 mb-2 md:mb-0 md:mr-4" onClick={signOut}>Sign Out</button> 
+          <p className="text-xs md:text-sm bg-neutraldark px-3 py-1 rounded-full">v0.4.1</p>
+        </div>
+      </div>
     </div>
-    <div className="flex-1 text-center">
-      <p className="text-xl font-semibold">Drey Dog Scheduler</p>
-      <p className="text-md">Scheduling Made Simple</p>
-    </div>
-    <div className="flex justify-end w-1/4">
-    <button className="text-lg mr-4 hover:bg-blue-700 rounded-full px-3 " onClick={signOut}>Sign Out</button> 
-      <p className="text-sm bg-blue-700 px-3 py-1 rounded-full">v0.3.1</p>
-    </div>
-  </div>
-</>
-
-
-  
+  </>
 );
+
+
 }
 
 export default Header;

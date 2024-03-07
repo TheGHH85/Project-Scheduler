@@ -39,57 +39,59 @@ function ScheduleView() {
 
 
 
-    
-        return (
-          <div className="flex flex-col min-h-screen">
-          <div className="flex-grow pb-16">
-            <Header />
-            <div className="flex justify-center space-x-4 mt-5">
-            <Link to="/AddClient" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Client</Link>
-            <Link to="/ClientList" className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Client List</Link>
-        </div>
-                <h1 className="text-center text-3xl mt-14">Schedule View</h1>
-              
-                <div className="my-5">
-                    {/* First Row: Monday to Friday */}
-                    <div className="flex justify-center mb-4 space-x-2">
-                      {weekDays.slice(0, 3).map((day, index) => (
-                          <div key={index} 
-                               className="cursor-pointer bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                               onClick={() => handleDayClick(day)}>
-                              {format(new Date(day), 'EEEE, MMMM d')}
-                          </div>
-                      ))}
-                    </div>
-                    {/* Second Row: Saturday and Sunday */}
-                    <div className="flex justify-center space-x-2">
-                      {weekDays.slice(3).map((day, index) => (
-                          <div key={index} 
-                               className="cursor-pointer bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                               onClick={() => handleDayClick(day)}>
-                              {format(new Date(day), 'EEEE, MMMM d')}
-                          </div>
-                      ))}
-                    </div>
-                </div>
-                <div className="flex justify-center mt-4">
-                  <button
-                    onClick={prevWeek}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-150 ease-in-out mr-2"
-                  >
-                    Previous Week
-                  </button>
-                  <button
-                    onClick={nextWeek}
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-150 ease-in-out"
-                  >
-                    Next Week
-                  </button>
-                </div>
-        </div>
-                <Footer />
-            </div>
-        );
+return (
+  <div className="flex flex-col min-h-screen bg-darkblue text-primarytext">
+      <div className="flex-grow pb-16">
+          <Header />
+          <div className="flex flex-col items-center space-y-4 mt-8 md:flex-row md:space-y-0 md:space-x-6 md:justify-center">
+              <Link to="/AddClient" className="bg-accent1 hover:bg-accent2 text-white font-bold py-4 px-6 rounded-lg text-lg">Add Client</Link>
+              <Link to="/ClientList" className="bg-softblue hover:bg-accent2 text-white font-bold py-4 px-6 rounded-lg text-lg">Client List</Link>
+          </div>
+          <h1 className="text-center text-4xl mt-10 mb-8">Schedule View</h1>
+          
+          <div className="my-8">
+              {/* First Row: Monday to Wednesday */}
+              <div className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+                  {weekDays.slice(0, 3).map((day, index) => (
+                      <div key={index} 
+                          className="cursor-pointer bg-neutraldark hover:bg-neutrallight text-white font-semibold py-3 px-6 border border-neutrallight rounded-lg shadow-lg text-lg"
+                          onClick={() => handleDayClick(day)}>
+                          {format(new Date(day), 'EEEE, MMMM d')}
+                      </div>
+                  ))}
+              </div>
+              {/* Second Row: Thursday to Sunday */}
+              <div className="flex flex-col md:flex-row justify-center items-center mt-5 space-y-4 md:space-y-0 md:space-x-4">
+                  {weekDays.slice(3).map((day, index) => (
+                      <div key={index} 
+                          className="cursor-pointer bg-neutraldark hover:bg-neutrallight text-white font-semibold py-3 px-6 border border-neutrallight rounded-lg shadow-lg text-lg"
+                          onClick={() => handleDayClick(day)}>
+                          {format(new Date(day), 'EEEE, MMMM d')}
+                      </div>
+                  ))}
+              </div>
+          </div>
+          <div className="flex flex-col items-center space-y-4 mt-8 md:flex-row md:space-x-4 md:justify-center">
+              <button
+                  onClick={prevWeek}
+                  className="bg-accent1 hover:bg-accent2 text-white font-bold py-3 px-8 rounded-lg transition duration-150 ease-in-out text-lg"
+              >
+                  Previous Week
+              </button>
+              <button
+                  onClick={nextWeek}
+                  className="bg-softblue hover:bg-accent2 text-white font-bold py-3 px-8 rounded-lg transition duration-150 ease-in-out text-lg"
+              >
+                  Next Week
+              </button>
+          </div>
+      </div>
+      <Footer />
+  </div>
+);
+
+
+
         
     }
     

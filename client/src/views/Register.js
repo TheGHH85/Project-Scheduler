@@ -40,7 +40,7 @@ function RegisterForm(){
           <Header />
           <main className="flex-grow">
             <div className="flex flex-col items-center justify-center py-6">
-              <h1 className="text-2xl font-bold text-gray-800 mb-6">Add Client Page</h1>
+              <h1 className="text-2xl font-bold text-white mb-6">Register a New User</h1>
               <form
                 className="flex flex-col space-y-4 w-full max-w-md mx-auto p-4 bg-white shadow-lg rounded-lg"
                 onSubmit={register}

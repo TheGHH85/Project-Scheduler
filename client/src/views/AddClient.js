@@ -41,7 +41,7 @@ const handleChange = (e) => {
       <Header />
       <main className="flex-grow">
         <div className="flex flex-col items-center justify-center py-6">
-          <h1 className="text-2xl font-bold text-gray-800 mb-6">Add Client Page</h1>
+          <h1 className="text-2xl font-bold text-primarytext mb-6">Add Client</h1>
           <form
             className="flex flex-col space-y-4 w-full max-w-md mx-auto p-4 bg-white shadow-lg rounded-lg"
             onSubmit={handleSubmit}
@@ -95,7 +95,7 @@ const handleChange = (e) => {
             >
               Add Client
             </button>
-            <Link to="/"
+            <Link to="/MainPage"
               className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
             >
               Cancel</Link>
