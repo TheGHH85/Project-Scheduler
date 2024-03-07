@@ -6,7 +6,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const classRoutes = require('./controllers/scheduleControllers');
 const clientController = require('./controllers/clientControllers');
-
+const authController = require('./controllers/authController');
+const passport = require('passport');
 
 const app = express();
 
@@ -36,12 +37,14 @@ app.use(session({
 }));
 
 app.use(cookieParser("secretcode"));
-
-
+app.use(passport.initialize());
+app.use(passport.session());
+require('./controllers/passportConfig')(passport);
 app.use(clientController);
 
 
 app.use('/classes', classRoutes);
+app.use(authController);
 
 
 app.use(express.static('public'));

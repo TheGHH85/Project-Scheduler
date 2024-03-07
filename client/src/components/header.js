@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
+import { useSignOut } from '../Authentication/useSignOut';
 
 function Header(){
+  const signOut = useSignOut();
 const [currentDate, setCurrentDate] = useState(new Date());
 
 useEffect(() => {
@@ -21,7 +23,8 @@ return(
       <p className="text-md">Scheduling Made Simple</p>
     </div>
     <div className="flex justify-end w-1/4">
-      <p className="text-sm bg-blue-700 px-3 py-1 rounded-full">v0.2.2</p>
+    <button className="text-lg mr-4 hover:bg-blue-700 rounded-full px-3 " onClick={signOut}>Sign Out</button> 
+      <p className="text-sm bg-blue-700 px-3 py-1 rounded-full">v0.3.1</p>
     </div>
   </div>
 </>
