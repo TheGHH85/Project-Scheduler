@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { format, startOfWeek, addDays, subWeeks, addWeeks } from 'date-fns';
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../css/index.css';
 import Header from '../components/header';
 import Footer from '../components/footer';
@@ -40,9 +41,14 @@ function ScheduleView() {
 
     
         return (
-            <>
+          <div className="flex flex-col min-h-screen">
+          <div className="flex-grow pb-16">
             <Header />
-                <h1 className="text-center text-3xl my-5">Schedule View</h1>
+            <div className="flex justify-center space-x-4 mt-5">
+            <Link to="/AddClient" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Client</Link>
+            <Link to="/ClientList" className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Client List</Link>
+        </div>
+                <h1 className="text-center text-3xl mt-14">Schedule View</h1>
               
                 <div className="my-5">
                     {/* First Row: Monday to Friday */}
@@ -80,9 +86,9 @@ function ScheduleView() {
                     Next Week
                   </button>
                 </div>
-        
+        </div>
                 <Footer />
-            </>
+            </div>
         );
         
     }

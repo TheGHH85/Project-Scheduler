@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import AddClassModal from '../components/AddClass';
 import SelectClientModal from '../components/SelectClientModal';
+import { Link } from 'react-router-dom';
 import '../css/index.css';
 import axios from 'axios';
 import Header from '../components/header';
 import Footer from '../components/footer';
-import moment from 'moment';
+
 
 const DayDetailView = () => {
     const { date } = useParams();
@@ -106,15 +107,21 @@ const DayDetailView = () => {
     };
 
     return (
-        <div>
+        <div className="flex flex-col min-h-screen">
+              <div className="flex-grow pb-16">
             <Header />
-            <h2>Classes for {date}</h2>
+            <div className="flex justify-center space-x-4 mt-5">
+            <Link to="/ScheduleView" className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Weekly View</Link>
+        </div>
+            <h2 className='grid text-center mt-5 text-3xl'>Classes for {date}</h2>
    
    
 
-            <button onClick={handleAddClassClick} className="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Add Class
+            <div className="flex justify-center">
+    <button onClick={handleAddClassClick} className="flex items-center m-7 bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-12 rounded">
+                       Add Class
             </button>
+            </div>
             {showAddClassModal && <AddClassModal date={date} onClose={handleCloseAddClassModal} refreshClasses={refreshClasses} />}
             
             <div className="flex flex-row items-start justify-center h-screen">
@@ -146,9 +153,10 @@ const DayDetailView = () => {
             </div>
     
             {showClientModal && <SelectClientModal isOpen={showClientModal} onClose={() => setShowClientModal(false)} clients={clients} onClientSelected={handleClientSelected} />}
-       
+        </div>
         <Footer />
         </div>
+       
     );
     
 };

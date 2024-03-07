@@ -36,6 +36,8 @@ const handleChange = (e) => {
 
   return (
     <div className="flex flex-col min-h-screen">
+    <div className="flex-grow pb-16">
+    <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow">
         <div className="flex flex-col items-center justify-center py-6">
@@ -101,8 +103,10 @@ const handleChange = (e) => {
         </form>
       </div>
     </main>
+    </div>
     <Footer className="mt-auto">
     </Footer>
+    </div>
   </div>
    
     );

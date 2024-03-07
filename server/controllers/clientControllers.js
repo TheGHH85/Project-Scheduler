@@ -12,7 +12,8 @@ router.post('/add-client', function (req, res) {
     const newClient = new Client({
         name: clientInfo.name,
         owner: clientInfo.owner,
-        breed: clientInfo.breed
+        breed: clientInfo.breed,
+        email: clientInfo.email
     });
     
     newClient.save()
