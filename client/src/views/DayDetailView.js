@@ -93,21 +93,10 @@ const DayDetailView = () => {
         fetchClasses();
         setShowAddClassModal(false);
     };
-    const getColorClass = (classType) => {
-        switch (classType) {
-          case 'Class A':
-            return 'bg-blue-500';
-          case 'Class B':
-            return 'bg-red-500';
-          case 'Class C':
-            return 'bg-green-500';
-          default:
-            return '';
-        }
-    };
+   
 
     return (
-        <div className="flex flex-col min-h-screen bg-darkblue text-primarytext">
+        <div className="flex flex-col min-h-screen text-primarytext">
           <div className="flex-grow pb-16">
             <Header />
             <div className="flex justify-center mt-5 md:space-x-4">
@@ -123,7 +112,7 @@ const DayDetailView = () => {
       
             <div className="flex flex-col space-y-4 items-center mt-5 md:flex-row md:space-y-0 md:space-x-4 md:justify-center md:items-start">
               {['Class A', 'Class B', 'Class C'].map((classType) => (
-                <div key={classType} className={`bg-softblue text-white p-5 overflow-auto rounded-lg md:flex-1`}>
+                <div key={classType} className={`bg-softblue text-white text-center p-5 overflow-auto rounded-lg md:flex-1`}>
                   <h3 className="text-xl font-bold">{classType}</h3>
                   {classes.filter(cls => cls.classType === classType)
                     .sort((a, b) => a.time.localeCompare(b.time))

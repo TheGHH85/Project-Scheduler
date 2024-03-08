@@ -40,7 +40,7 @@ function ScheduleView() {
 
 
 return (
-  <div className="flex flex-col min-h-screen bg-darkblue text-primarytext">
+  <div className="flex flex-col min-h-screen  text-primarytext">
       <div className="flex-grow pb-16">
           <Header />
           <div className="flex flex-col items-center space-y-4 mt-8 md:flex-row md:space-y-0 md:space-x-6 md:justify-center">
@@ -71,16 +71,16 @@ return (
                   ))}
               </div>
           </div>
-          <div className="flex flex-col items-center space-y-4 mt-8 md:flex-row md:space-x-4 md:justify-center">
+          <div className="flex flex-col items-center space-y-4 mt-8 md:flex-row md:space-y-0 md:space-x-6 md:justify-center">
               <button
                   onClick={prevWeek}
-                  className="bg-accent1 hover:bg-accent2 text-white font-bold py-3 px-8 rounded-lg transition duration-150 ease-in-out text-lg"
+                  className="bg-accent1 hover:bg-accent2 text-white font-bold py-4 px-6 rounded-lg text-lg"
               >
                   Previous Week
               </button>
               <button
                   onClick={nextWeek}
-                  className="bg-softblue hover:bg-accent2 text-white font-bold py-3 px-8 rounded-lg transition duration-150 ease-in-out text-lg"
+                  className="bg-softblue hover:bg-accent2 text-white font-bold py-4 px-9 rounded-lg text-lg"
               >
                   Next Week
               </button>
