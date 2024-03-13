@@ -4,6 +4,7 @@ const clientSchema = new mongoose.Schema({
     owner: String,
     breed: String,
     email: String,
+    status: String,
 });
 
 module.exports = mongoose.model('Client', clientSchema);

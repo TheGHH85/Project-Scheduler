@@ -12,7 +12,8 @@ const [formData, setFormData] = useState({
     name: '',
     owner: '',
     breed: '',
-    email: ''
+    email: '',
+    status: ''
 });
 
 const handleSubmit = async (e) => {
@@ -24,15 +25,18 @@ const handleSubmit = async (e) => {
         name: '',
         owner: '',
         breed: '',
-        email: ''
+        email: '',
+        status: ''
     });
 
-    navigate('/');
+    navigate('/ClientList');
 };
 
 const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const { name, value } = e.target;
+  setFormData({ ...formData, [name]: value });
+  console.log(formData)
+};
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -47,24 +51,23 @@ const handleChange = (e) => {
             onSubmit={handleSubmit}
           >
                     <label className="block text-sm font-medium text-gray-700">
-                      Name:
-                    </label>
-                    <input
-                      className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                    />
-          
-                    <label className="block text-sm font-medium text-gray-700">
-                      Owner:
+                      Owner Name:
                     </label>
                     <input
                       className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       type="text"
                       name="owner"
                       value={formData.owner}
+                      onChange={handleChange}
+                    />
+                    <label className="block text-sm font-medium text-gray-700">
+                      Dog Name:
+                    </label>
+                    <input
+                      className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      type="text"
+                      name="name"
+                      value={formData.name}
                       onChange={handleChange}
                     />
           
@@ -88,6 +91,21 @@ const handleChange = (e) => {
                       value={formData.email}
                       onChange={handleChange}
                     />
+                    <label className="block text-sm font-medium text-gray-700">
+  Status:
+</label>
+<select
+  name="status"
+  value={formData.status}
+  onChange={handleChange}
+  className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+>
+  <option value="">Select Status</option> {/* Ensure there's a default option or remove it based on your needs */}
+  <option value="Active">Active</option>
+  <option value="Inactive">Inactive</option>
+</select>
+
+
                       <div className="flex justify-between space-x-4">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

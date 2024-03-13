@@ -13,8 +13,8 @@ router.get('/:date', async (req, res) => {
     // Now currentDate represents the date increased by 1 day
     
     // Convert from EST to UTC for querying
-    let startDate = moment.tz(`${date} 00:00`, "America/New_York").utc();
-    let endDate = moment.tz(`${date} 23:59`, "America/New_York").utc();
+    const startDate = moment.tz(`${date} 00:00`, "America/New_York").utc();
+    const endDate = moment.tz(`${date} 23:59`, "America/New_York").utc();
 
     try {
         const classes = await Class.find({
