@@ -14,6 +14,7 @@ module.exports = {
            // Accent colors for Link and Class boxes
            accent1: '#F4D35E', // Vibrant yellow/gold
            accent2: '#2EC4B6', // Bright teal
+           accent3: '#3d6284',
    
            // Text and icons
            primarytext: '#FFFFFF', // White for primary text

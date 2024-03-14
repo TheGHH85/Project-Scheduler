@@ -6,22 +6,43 @@ const AddClass = ({date, onClose, refreshClasses}) => {
     const [instructor, setInstructor] = useState('');
     const [classType, setClassType] = useState('');
     const [time, setTime] = useState('');
+    const [description, setDescription] = useState('');
+   
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+      e.preventDefault();
 
-        try{
-        await axios.post('http://localhost:8080/classes/add-class', {date, instructor, classType, time});
-        setInstructor('');
-        setClassType('');
-        setTime('');
-        onClose();
-        refreshClasses();
-    } catch (error){
-        console.log(error);
-    }
+      const startDate = new Date(date);
+const endDate = new Date(date);
 
-};
+
+endDate.setDate(startDate.getDate() + (7 * 7) + 1);
+
+  
+  
+      const classData = { date, instructor, classType, time, startDate: startDate.toISOString().split('T')[0], // Format to YYYY-MM-DD
+      endDate: endDate.toISOString().split('T')[0],};
+  
+      if (classType === 'Other') {
+        classData.description = description;
+      }
+  
+      try {
+          await axios.post('http://localhost:8080/classes/add-class', classData);
+          // Reset states
+          setInstructor('');
+          setClassType('');
+          setTime('');
+          setDescription('');
+          onClose();
+          refreshClasses();
+      } catch (error) {
+          console.log(error);
+      }
+  };
+  
+
+
 
 return (
   <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" onClick={onClose}> {/* Overlay */}
@@ -36,14 +57,32 @@ return (
           required
           className="w-full px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-softblue bg-neutraldark text-white"
         />
-        <input
-          type="text"
-          value={classType}
-          placeholder="Class Type"
-          onChange={(e) => setClassType(e.target.value)}
-          required
-          className="w-full px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-softblue bg-neutraldark text-white"
-        />
+<select
+  name="classType"
+  value={classType}
+  onChange={(e) => setClassType(e.target.value)}
+  className="w-full px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-softblue bg-neutraldark text-white"
+>
+  <option value="">Select Class Type</option>
+  <option value="Puppy">Puppy</option>
+  <option value="Advanced">Advanced</option>
+  <option value="Rally">Rally</option>
+  <option value="Other">Other</option>
+</select>
+
+{classType === 'Other' && (
+  <input
+    type="text"
+    name="description"
+    placeholder="Class Description"
+    value={description}
+    onChange={(e) => setDescription(e.target.value)}
+    required
+    className="w-full px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-softblue bg-neutraldark text-white"
+  />
+)}
+
+        
         <input
           type="time"
           value={time}

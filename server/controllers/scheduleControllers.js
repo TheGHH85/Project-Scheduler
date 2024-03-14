@@ -31,7 +31,7 @@ router.get('/:date', async (req, res) => {
     }
 });
 router.post('/add-class', async (req, res) => {
-    const { date, instructor, classType, time } = req.body;
+    const { date, instructor, classType, time, description, startDate, endDate} = req.body;
     
     // Convert the date string to a Date object using moment to handle timezone correctly
     const initialDate = moment.tz(date, "YYYY-MM-DD", "America/New_York").startOf('day');
@@ -56,6 +56,9 @@ router.post('/add-class', async (req, res) => {
                 instructor,
                 classType,
                 time,
+                description,
+                startDate,
+                endDate,
             });
 
             // Push the save promise to our array
@@ -66,6 +69,7 @@ router.post('/add-class', async (req, res) => {
         const savedClasses = await Promise.all(saveClassPromises);
 
         // Send a success response back with the saved class data
+        console.log("Classes saved:", savedClasses);
         res.status(201).json(savedClasses);
     } catch (err) {
         console.error(err);
@@ -93,6 +97,9 @@ router.post('/:classId/add-client', async (req, res) => {
             instructor: originalClass.instructor,
             classType: originalClass.classType,
             time: originalClass.time,
+            description: originalClass.description,
+            startDate: originalClass.startDate,
+            endDate: originalClass.endDate,
             date: { $gte: originalClass.date, $lte: endDate }
         });
 
@@ -109,6 +116,47 @@ router.post('/:classId/add-client', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
+
+router.post('/remove-client', async (req, res) => {
+    console.log("Request to remove client received:", req.body);
+
+    const { clientId, startDate, classId } = req.body;
+
+    try {
+        // Find the class from which the client is to be removed to get its details
+        const classToRemoveFrom = await Class.findById(classId);
+        if (!classToRemoveFrom) {
+            return res.status(404).json({ message: "Class not found" });
+        }
+
+        // Define the query to find all future instances of this class
+        const query = {
+            instructor: classToRemoveFrom.instructor,
+            classType: classToRemoveFrom.classType,
+            time: classToRemoveFrom.time,
+            // Ensure we're selecting classes on or after the provided startDate
+            date: { $gte: new Date(startDate) }
+        };
+
+        // Perform the update operation
+        const result = await Class.updateMany(query, {
+            $pull: { clients: clientId }
+        });
+
+        if(result.modifiedCount === 0) {
+            console.log("No classes were updated.");
+            return res.status(204).send();
+        }
+
+        console.log(`Removed client from ${result.modifiedCount} classes.`);
+        res.json({ message: `Client removed from future classes starting from ${startDate}.` });
+    } catch (error) {
+        console.error("Error removing client from classes:", error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
 
 
 module.exports = router;

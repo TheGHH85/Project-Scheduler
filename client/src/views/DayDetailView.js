@@ -59,6 +59,24 @@ const DayDetailView = () => {
         setShowClientModal(true);
     };
 
+    const handleDeleteClientFromFutureClasses = async (clientId, classStartDate, classId) => {
+      if (window.confirm("Are you sure you want to remove this client from this and all future classes?")) {
+        try {
+          await axios.post(`http://localhost:8080/classes/remove-client`, {
+            clientId,
+            startDate: classStartDate,
+            classId, // Include classId if it's being used in your logic
+          });
+          refreshClasses(); // Refresh classes to reflect the change
+        } catch (error) {
+          console.error("Failed to delete client from future classes:", error);
+        }
+      }
+    };
+    
+    
+    
+
     const handleClientSelected = async (clientId, clientName) => {
         try {
             const url = `http://localhost:8080/classes/${currentClassId}/add-client`;
@@ -111,18 +129,29 @@ const DayDetailView = () => {
             {showAddClassModal && <AddClassModal date={date} onClose={handleCloseAddClassModal} refreshClasses={refreshClasses} />}
       
             <div className="flex flex-col space-y-4 items-center mt-5 md:flex-row md:space-y-0 md:space-x-4 md:justify-center md:items-start">
-              {['Class A', 'Class B', 'Class C'].map((classType) => (
+              {['Puppy', 'Advanced', 'Rally', 'Other'].map((classType) => (
                 <div key={classType} className={`bg-softblue text-white text-center p-5 overflow-auto rounded-lg md:flex-1`}>
                   <h3 className="text-xl font-bold">{classType}</h3>
                   {classes.filter(cls => cls.classType === classType)
                     .sort((a, b) => a.time.localeCompare(b.time))
                     .map((cls, index) => (
-                      <div key={cls._id} className="my-2 p-2 bg-neutraldark text-white rounded shadow">
-                        <p>{cls.classType} - {cls.instructor} at {cls.time}</p>
+                      <div key={cls._id} className="border-2 border-white-900 my-2 p-2 bg-neutraldark text-white rounded shadow">
+                        <div className="border-2 border-blue-900 text-lg bg-accent3 rounded pt-2 pb-4 shadow">
+                        <p>{cls.instructor} at {cls.time}</p>
+                        <p>Start Date: {cls.startDate}</p>
+                        <p>End Date: {cls.endDate}</p>
+                        {cls.classType === 'Other' && <p>Description: {cls.description}</p>}
+                        </div>
                         {cls.clients && cls.clients.length > 0 && (
                           <ul className="mt-2 text-primarytext">
+                            <p>Clients:</p>
                             {cls.clients.map(client => (
-                              <li key={client._id}>{client.name}</li>
+                              <li key={client._id}>
+                              <span   className="cursor-pointer hover:text-red-500"
+ onClick={() => handleDeleteClientFromFutureClasses(client._id, date, cls._id)}>{client.name}</span>
+                             
+                            
+                              </li>
                             ))}
                           </ul>
                         )}
