@@ -2,9 +2,8 @@ import React, {useState} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import '../css/index.css';
-import Header from '../components/header';
 import Footer from '../components/footer';
-
+import HeaderNav from '../components/navbar';
 function AddClient(){
 const navigate = useNavigate();
 const [formData, setFormData] = useState({
@@ -42,7 +41,7 @@ const handleChange = (e) => {
     <div className="flex flex-col min-h-screen">
     <div className="flex-grow pb-16">
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <HeaderNav />
       <main className="flex-grow">
         <div className="flex flex-col items-center justify-center py-6">
           <h1 className="text-2xl font-bold text-primarytext mb-6">Add Client</h1>

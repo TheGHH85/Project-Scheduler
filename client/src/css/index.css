@@ -2,4 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-  
+.react-calendar {
+  background: #282c34; /* Dark background */
+  color: #000; /* Changed to white text for better contrast */
+  border: none;
+}
+
+.react-calendar__navigation button {
+  color: #000; /* Changed to white text for better contrast */
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #000; /* Changed to white text for better contrast */
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background: #1e2125;
+  color: #000; /* Changed to white text for better contrast */
+}
+
+.react-calendar__tile--active {
+  background: #0077cc;
+  color: #000; /* Changed to white text for better contrast */
+}
+
+/* Custom style for days with scheduled classes */
+.scheduled-class {
+  background-color: #ff6347 !important; /* Vivid red background for scheduled days */
+  color: #000 !important; /* White text for readability */
+}

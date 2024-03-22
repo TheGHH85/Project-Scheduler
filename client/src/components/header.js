@@ -22,7 +22,7 @@ return (
         </div>
         <div className="flex flex-col md:flex-row items-center">
           <button className="text-sm md:text-lg hover:bg-softblue rounded-full px-3 py-1 mb-2 md:mb-0 md:mr-4" onClick={signOut}>Sign Out</button> 
-          <p className="text-xs md:text-sm bg-neutraldark px-3 py-1 rounded-full">v0.4.3</p>
+          <p className="text-xs md:text-sm bg-neutraldark px-3 py-1 rounded-full">v0.4.4</p>
         </div>
       </div>
     </div>

@@ -38,7 +38,8 @@ router.post('/register', async (req, res) => {
         // Create a new user with the hashed password
         const newUser = new User({
             username: req.body.username,
-            password: hashedPassword
+            password: hashedPassword,
+            role: req.body.role
         });
 
         // Save the new user to the database
@@ -82,5 +83,50 @@ router.get('/user', (req, res) => {
         res.status(401).json({ isAuthenticated: false, message: "Not Authenticated" });
     }
 });
+
+router.get('/users', async (req, res) => {
+    try {
+        const users = await User.find({});
+        res.json(users);
+    } catch (err) {
+        console.error("Error fetching clients:", err);
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// Import necessary libraries and models at the beginning of your file
+// Assuming bcrypt and User model are already imported
+
+// Add this endpoint to your Express router
+router.post('/users/:id', async (req, res) => {
+    try {
+        const { password, role, username } = req.body;
+
+        // If there's a password to update, hash it
+        let hashedPassword;
+        if (password) {
+            hashedPassword = await bcrypt.hash(password, 10);
+        }
+
+        // Update the user with new data, only updating the fields that were provided
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+            ...(username && { username }),
+            ...(role && { role }),
+            ...(password && { password: hashedPassword })
+        }, { new: true }); // { new: true } ensures the returned document is the updated one
+
+        if (!updatedUser) {
+            return res.status(404).send("User not found");
+        }
+
+        // You might not want to send back the password, even in hashed form
+        const { password: _, ...userWithoutPassword } = updatedUser.toObject();
+        res.status(200).json(userWithoutPassword);
+    } catch (err) {
+        console.error("Error updating user:", err);
+        res.status(500).send("An error occurred");
+    }
+});
+
 
 module.exports = router;

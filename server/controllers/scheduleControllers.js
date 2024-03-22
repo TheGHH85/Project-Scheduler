@@ -156,6 +156,26 @@ router.post('/remove-client', async (req, res) => {
     }
 });
 
+router.get('/api/scheduled-dates', async (req, res) => {
+    try {
+      // Fetch all distinct dates from the classes collection
+      // This assumes 'date' is stored in a format that can be directly used for comparison and aggregation
+      // If your date is stored in a different format, you might need to adjust the query accordingly
+      const dates = await Class.distinct("date");
+      
+      // Optionally, format dates or perform additional filtering here
+      const formattedDates = dates.map(date =>
+        moment(date).format('YYYY-MM-DD') // Format each date as 'YYYY-MM-DD'
+      );
+  
+      // Send the distinct dates back as the response
+      res.json(formattedDates);
+    } catch (err) {
+      console.error("Error fetching scheduled class dates:", err);
+      res.status(500).json({ message: "Failed to fetch scheduled class dates." });
+    }
+  });
+
 
 
 

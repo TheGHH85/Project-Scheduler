@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Header from '../components/header';
+import HeaderNav from '../components/navbar';
 import Footer from '../components/footer';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,6 +10,7 @@ function RegisterForm(){
     const navigate = useNavigate();
     const [registerUserName, setRegisterUserName] = React.useState("");
     const [registerPassword, setRegisterPassword] = React.useState("");
+    const [registerRole, setRegisterRole] = React.useState("");
 
     const register = (e) => {
         e.preventDefault(); // Prevent form from refreshing the page
@@ -17,7 +18,8 @@ function RegisterForm(){
             method: "POST",
             data: {
                 username: registerUserName,
-                password: registerPassword
+                password: registerPassword,
+                role: registerRole,
             },
             withCredentials: true,
             url: "http://localhost:8080/register",
@@ -37,7 +39,7 @@ function RegisterForm(){
         <div className="flex flex-col min-h-screen">
         <div className="flex-grow pb-16">
         <div className="flex flex-col min-h-screen">
-          <Header />
+          <HeaderNav />
           <main className="flex-grow">
             <div className="flex flex-col items-center justify-center py-6">
               <h1 className="text-2xl font-bold text-white mb-6">Register a New User</h1>
@@ -67,6 +69,19 @@ function RegisterForm(){
                           onChange={(e) => setRegisterPassword(e.target.value)}
 
                         />
+
+                        <label className="block text-sm font-medium text-gray-700">
+                          Role:
+                        </label>
+                        <select
+  name="role"
+  onChange={(e) => setRegisterRole(e.target.value) }
+  className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+>
+  <option value="">Select Role</option> {/* Ensure there's a default option or remove it based on your needs */}
+  <option value="Trainer">Trainer</option>
+  <option value="Admin">Admin</option>
+</select>
               
                         
                           <div className="flex justify-between space-x-4">

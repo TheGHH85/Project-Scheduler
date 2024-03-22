@@ -15,6 +15,7 @@ module.exports = {
            accent1: '#F4D35E', // Vibrant yellow/gold
            accent2: '#2EC4B6', // Bright teal
            accent3: '#3d6284',
+           accent4: '#254e75',
    
            // Text and icons
            primarytext: '#FFFFFF', // White for primary text

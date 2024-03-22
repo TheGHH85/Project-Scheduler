@@ -9,6 +9,7 @@ import DayDetailview from './views/DayDetailView';
 import ClientList from './views/ClientList';
 import LoginPage from './views/LoginPage';
 import RegisterPage from './views/Register';
+import UsersList from './views/UsersList';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
       <Route path="/ScheduleView" element={<ScheduleView />} />
       <Route path="/DayDetailview/:date" element={<DayDetailview />} />
       <Route path="/ClientList" element={<ClientList />} />
+      <Route path="/UsersList" element={<UsersList />} />
       </Route>
     </Routes>
     </AuthProvider>

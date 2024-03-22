@@ -5,7 +5,7 @@ import SelectClientModal from '../components/SelectClientModal';
 import { Link } from 'react-router-dom';
 import '../css/index.css';
 import axios from 'axios';
-import Header from '../components/header';
+import HeaderNav from '../components/navbar';
 import Footer from '../components/footer';
 
 
@@ -116,7 +116,7 @@ const DayDetailView = () => {
     return (
         <div className="flex flex-col min-h-screen text-primarytext">
           <div className="flex-grow pb-16">
-            <Header />
+          <HeaderNav />
             <div className="flex justify-center mt-5 md:space-x-4">
               <Link to="/ScheduleView" className="bg-softblue hover:bg-lightgrey text-white font-bold py-2 px-4 rounded">Weekly View</Link>
             </div>
@@ -135,8 +135,8 @@ const DayDetailView = () => {
                   {classes.filter(cls => cls.classType === classType)
                     .sort((a, b) => a.time.localeCompare(b.time))
                     .map((cls, index) => (
-                      <div key={cls._id} className="border-2 border-white-900 my-2 p-2 bg-neutraldark text-white rounded shadow">
-                        <div className="border-2 border-blue-900 text-lg bg-accent3 rounded pt-2 pb-4 shadow">
+                      <div key={cls._id} className="my-2 p-2 bg-neutraldark text-white rounded shadow">
+                        <div className="border-2 border-accent4 text-lg bg-accent3 rounded pt-2 pb-4 shadow">
                         <p>{cls.instructor} at {cls.time}</p>
                         <p>Start Date: {cls.startDate}</p>
                         <p>End Date: {cls.endDate}</p>

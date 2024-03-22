@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import '../css/index.css';
-import Header from '../components/header';
+import HeaderNav from '../components/navbar';
 import Footer from '../components/footer';
 import UpdateClientModal from '../components/updateClientModal';
 
@@ -50,7 +50,7 @@ function ClientList()  {
 
     return (
         <>
-            <Header />
+            <HeaderNav />
             <div className="flex justify-center space-x-4 mt-5">
                 <Link to="/AddClient" className="bg-accent1 hover:bg-accent2 text-white font-bold py-2 px-4 rounded">Add Client</Link>
                 <Link to="/ScheduleView" className="bg-softblue hover:bg-lightgrey text-white font-bold py-2 px-4 rounded">Schedule View</Link>
