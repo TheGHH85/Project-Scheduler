@@ -21,7 +21,7 @@ function LoginPage() {
                 password: loginPassword
             },
             withCredentials: true,
-            url: "http://localhost:8080/login"
+            url: "http://52.91.94.163:8080/login"
         }).then((res) => {
             if(res.data.success) {
                 login(res.data.user);

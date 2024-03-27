@@ -22,7 +22,7 @@ function RegisterForm(){
                 role: registerRole,
             },
             withCredentials: true,
-            url: "http://localhost:8080/register",
+            url: "http://52.91.94.163:8080/register",
         }).then((res) => {
             console.log(res);
             navigate("/");

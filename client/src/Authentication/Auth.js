@@ -36,7 +36,7 @@ export function AuthProvider({ children }) {
         localStorage.removeItem('user');
         setCurrentUser(null);
         try {
-            const response = await fetch('http://localhost:8080/logout', {
+            const response = await fetch('http://52.91.94.163:8080/logout', {
                 method: 'POST',
                 credentials: 'include' // important to include credentials for cookies to be sent
             });
@@ -68,7 +68,7 @@ export function AuthProvider({ children }) {
      */
     const verifyUser = async () => {
         try {
-            const response = await fetch('http://localhost:8080/user', { 
+            const response = await fetch('http://52.91.94.163:8080/user', { 
                 credentials: 'include' // to ensure cookies are sent with the request
             });
             const data = await response.json();

@@ -12,7 +12,7 @@ function ProtectedRoute() {
         const verifyUser = async () => {
             if (!currentUser) {
                 try {
-                    const response = await axios.get('http://localhost:8080/checkAuth', { withCredentials: true });
+                    const response = await axios.get('http://52.91.94.163:8080/checkAuth', { withCredentials: true });
                     if (response.data.isAuthenticated) {
                         login(response.data.user);
                     }

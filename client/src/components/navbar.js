@@ -24,8 +24,7 @@ function HeaderWithNavbar() {
   ];
 
   const scheduleItems = [
-    { href: '/ScheduleView', label: 'Booking View' },
-    { href: '/Upcoming', label: 'Upcoming List' },
+    { href: '/ScheduleView', label: 'Booking View' }
   ];
 
   return (
@@ -42,7 +41,7 @@ function HeaderWithNavbar() {
         {/* Title and Version in the Middle */}
         <div className="flex-1 text-center">
           <Link to="/MainPage">
-            <p className="text-xl font-semibold">Drey Dog Scheduler</p>
+            <p className="text-xl font-semibold">Dog Boarding Scheduler</p>
             <p className="text-sm">Scheduling Made Simple</p>
             <p className="text-xs bg-neutraldark px-3 py-1 inline-block rounded-full">v0.4.5</p>
           </Link>

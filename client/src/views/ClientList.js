@@ -12,7 +12,7 @@ function ClientList()  {
     const [clients, setClients] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/clients')
+        axios.get('http://52.91.94.163:8080/clients')
         .then(response => {
             setClients(response.data);
         })
@@ -22,7 +22,7 @@ function ClientList()  {
     }, []);
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:8080/clients/${id}`)
+        axios.delete(`http://52.91.94.163:8080/clients/${id}`)
         .then(() => {
             // After deleting, filter out the deleted client from the clients state
             const updatedClients = clients.filter(client => client._id !== id);
@@ -35,7 +35,7 @@ function ClientList()  {
     };
 
     const handleSave = (updatedClient) => {
-        axios.put(`http://localhost:8080/clients/${updatedClient._id}`, updatedClient)
+        axios.put(`http://52.91.94.163:8080/clients/${updatedClient._id}`, updatedClient)
             .then(() => {
                 // Optionally: Refresh the client list from the server or update the state directly
                 setEditingClient(null); // Close the modal

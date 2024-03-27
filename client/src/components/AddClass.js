@@ -28,7 +28,7 @@ endDate.setDate(startDate.getDate() + (7 * 7) + 1);
       }
   
       try {
-          await axios.post('http://localhost:8080/classes/add-class', classData);
+          await axios.post('http://52.91.94.163:8080/classes/add-class', classData);
           // Reset states
           setInstructor('');
           setClassType('');

@@ -11,7 +11,7 @@ function UsersList()  {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/users')
+        axios.get('http://52.91.94.163:8080/users')
         .then(response => {
             setUsers(response.data);
         })
@@ -22,9 +22,9 @@ function UsersList()  {
 
     const handleSave = (updatedUser) => {
         // Ensure updatedUser includes the ID and any fields you want to update
-        axios.put(`http://localhost:8080/users/${updatedUser._id}`, updatedUser)            .then(response => {
+        axios.put(`http://52.91.94.163:8080/users/${updatedUser._id}`, updatedUser)            .then(response => {
                 // Refresh the user list to reflect the changes
-                axios.get('http://localhost:8080/users')
+                axios.get('http://52.91.94.163:8080/users')
                     .then(response => {
                         setUsers(response.data);
                         setEditingUsers(null); // Close the modal

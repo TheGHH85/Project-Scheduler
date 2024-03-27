@@ -18,7 +18,7 @@ const [formData, setFormData] = useState({
 const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post('http://localhost:8080/add-client', formData);
+    await axios.post('http://52.91.94.163:8080/add-client', formData);
     alert('Client Added sucessfully!');
     setFormData({
         name: '',

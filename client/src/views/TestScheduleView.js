@@ -10,7 +10,7 @@ function ScheduleView() {
   const [scheduledDates, setScheduledDates] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/scheduled-dates')
+    fetch('http://52.91.94.163:8080/api/scheduled-dates')
       .then(response => response.json())
       .then(data => {
         console.log("Fetched scheduled dates:", data); // Debugging line

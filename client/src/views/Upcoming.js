@@ -18,12 +18,12 @@ function Upcoming() {
             setError('');
             try {
                 // Fetch classes for the week
-                const classesResponse = await axios.get(`http://localhost:8080/classes/week/${encodeURIComponent(week)}`);
+                const classesResponse = await axios.get(`http://52.91.94.163:8080/classes/week/${encodeURIComponent(week)}`);
                 const updatedClasses = { ...initializeWeekDays(), ...groupAndSortClasses(classesResponse.data) };
                 setClasses(updatedClasses);
 
                 // Fetch clients
-                const clientsResponse = await axios.get('http://localhost:8080/clients');
+                const clientsResponse = await axios.get('http://52.91.94.163:8080/clients');
                 setClients(clientsResponse.data);
             } catch (error) {
                 console.error('Error fetching data:', error);

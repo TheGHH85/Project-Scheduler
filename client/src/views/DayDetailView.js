@@ -30,7 +30,7 @@ const DayDetailView = () => {
     const fetchClasses = async (date) => {
         try {
             // Fetch classes for the current date only
-            const response = await axios.get(`http://localhost:8080/classes/${encodeURIComponent(date)}`);
+            const response = await axios.get(`http://52.91.94.163:8080/classes/${encodeURIComponent(date)}`);
             setClasses(response.data);
         } catch (error) {
             console.error("Failed to fetch classes:", error);
@@ -43,7 +43,7 @@ const DayDetailView = () => {
     const fetchClients = async () => {
         console.log('Fetching classes...');
         try {
-            const response = await axios.get('http://localhost:8080/clients');
+            const response = await axios.get('http://52.91.94.163:8080/clients');
             setClients(response.data);
         } catch (error) {
             console.error("Failed to fetch clients:", error);
@@ -62,7 +62,7 @@ const DayDetailView = () => {
     const handleDeleteClientFromFutureClasses = async (clientId, classStartDate, classId) => {
       if (window.confirm("Are you sure you want to remove this client from this and all future classes?")) {
         try {
-          await axios.post(`http://localhost:8080/classes/remove-client`, {
+          await axios.post(`http://52.91.94.163:8080/classes/remove-client`, {
             clientId,
             startDate: classStartDate,
             classId, // Include classId if it's being used in your logic
@@ -79,7 +79,7 @@ const DayDetailView = () => {
 
     const handleClientSelected = async (clientId, clientName) => {
         try {
-            const url = `http://localhost:8080/classes/${currentClassId}/add-client`;
+            const url = `http://52.91.94.163:8080/classes/${currentClassId}/add-client`;
             const response = await axios.post(url, { clientId });
             // Optionally verify the response before updating the state
     
