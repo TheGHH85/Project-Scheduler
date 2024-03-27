@@ -23,6 +23,11 @@ function HeaderWithNavbar() {
     { href: '/UsersList', label: 'Users List' },
   ];
 
+  const scheduleItems = [
+    { href: '/ScheduleView', label: 'Booking View' },
+    { href: '/Upcoming', label: 'Upcoming List' },
+  ];
+
   return (
     <div className="bg-darkblue text-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between">
@@ -39,7 +44,7 @@ function HeaderWithNavbar() {
           <Link to="/MainPage">
             <p className="text-xl font-semibold">Drey Dog Scheduler</p>
             <p className="text-sm">Scheduling Made Simple</p>
-            <p className="text-xs bg-neutraldark px-3 py-1 inline-block rounded-full">v0.4.4</p>
+            <p className="text-xs bg-neutraldark px-3 py-1 inline-block rounded-full">v0.4.5</p>
           </Link>
         </div>
 
@@ -47,8 +52,9 @@ function HeaderWithNavbar() {
         <div className="flex-1 flex justify-center md:justify-end">
           <nav className="text-primarytext flex justify-center md:justify-end mb-4 md:mb-0 space-x-4">
             {(currentUser?.role === 'Trainer' || currentUser?.role === 'Admin') && (
-              <Link to="/ScheduleView" className="hover:text-secondarytext py-2">Schedule</Link>
-            )}
+              <DropdownMenu title="Schedule" items={scheduleItems} />
+
+           )}
             <DropdownMenu title="Clients" items={clientItems} />
             {currentUser?.role === 'Admin' && (
               <DropdownMenu title="Users" items={userItems} />

@@ -156,25 +156,27 @@ router.post('/remove-client', async (req, res) => {
     }
 });
 
-router.get('/api/scheduled-dates', async (req, res) => {
+
+
+router.get('/week/:year-W:week', async (req, res) => {
+    const { year, week } = req.params;
+    
+    // Calculate the start and end of the specified week
+    const startDate = moment().year(year).week(week).startOf('isoWeek');
+    const endDate = moment().year(year).week(week).endOf('isoWeek');
+
     try {
-      // Fetch all distinct dates from the classes collection
-      // This assumes 'date' is stored in a format that can be directly used for comparison and aggregation
-      // If your date is stored in a different format, you might need to adjust the query accordingly
-      const dates = await Class.distinct("date");
-      
-      // Optionally, format dates or perform additional filtering here
-      const formattedDates = dates.map(date =>
-        moment(date).format('YYYY-MM-DD') // Format each date as 'YYYY-MM-DD'
-      );
-  
-      // Send the distinct dates back as the response
-      res.json(formattedDates);
+        const classes = await Class.find({
+            date: { $gte: startDate.toDate(), $lte: endDate.toDate() }
+        }).populate('clients');
+        res.json(classes);
     } catch (err) {
-      console.error("Error fetching scheduled class dates:", err);
-      res.status(500).json({ message: "Failed to fetch scheduled class dates." });
+        console.error("Error fetching classes for the week:", err);
+        res.status(500).json({ message: err.message });
     }
-  });
+});
+
+
 
 
 
