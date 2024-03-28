@@ -1,6 +1,6 @@
 # Project-Scheduler
 
-A mock dog boarding scheduler CRUD application that uses the MERN stack using  RESTful API calls and user authentication and verification (please see 'Instructions' below for details).
+A mock dog boarding scheduler CRUD application that uses the MERN stack using  RESTful API calls and user authentication and verification.
 
 ## Features
 
