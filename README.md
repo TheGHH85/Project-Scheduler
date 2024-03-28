@@ -48,6 +48,5 @@ Also, when you add a class thats type "Other" a descriptions files is added to t
 - postcss/tailwindcss
 
 ## Authentication
-Authentication works by having the webpage check to see if there are credentials in the browser, and if so search through the users collection in MongoDB to see if there is a match. If so then the user will be alowed entry, if not they will be prompted back to the login screen. Each webpage (or route) is incased by the route componented called <ProtectedRoute> where any routes that are within the tag will be checking to see if the user is authenticated. Only unauthenticated users can access the Login and Register page. you can test this by signing out and adding '/MainPage' to the URL, and you will see that you will be brought back to the Login page.
-
+Authentication operates by having the webpage verify the presence of credentials in the browser. If credentials are found, it searches through the users' collection in MongoDB for a matching entry. If a match is found, the user is granted access; otherwise, they are redirected back to the login screen. Each webpage (or route) is enclosed within a route component, ensuring that any routes contained within this tag are subjected to authentication checks. Only unauthenticated users can access the Login and Register pages. You can test this by signing out and appending '/MainPage' to the URL, where you will find that you are redirected back to the Login page.
 
